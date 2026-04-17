@@ -18,10 +18,22 @@ export default function Register() {
   const router = useRouter();
 
   const register = async () => {
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      password: form.password,
+      role: form.role,
+    };
+
+    if (!payload.name || !payload.email || !payload.password) {
+      toast.error("Fill all fields");
+      return;
+    }
+
     try {
       await axios.post(
         apiUrl("/api/auth/register"),
-        form
+        payload
       );
 
       toast.success("Registered successfully!");
@@ -43,6 +55,7 @@ export default function Register() {
 
         <input
           placeholder="Full Name"
+          value={form.name}
           className="w-full mb-3 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white"
           onChange={(e) =>
             setForm({ ...form, name: e.target.value })
@@ -51,6 +64,8 @@ export default function Register() {
 
         <input
           placeholder="Email"
+          type="email"
+          value={form.email}
           className="w-full mb-3 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white"
           onChange={(e) =>
             setForm({ ...form, email: e.target.value })
@@ -60,6 +75,7 @@ export default function Register() {
         <input
           type="password"
           placeholder="Password"
+          value={form.password}
           className="w-full mb-3 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white"
           onChange={(e) =>
             setForm({ ...form, password: e.target.value })
@@ -67,6 +83,7 @@ export default function Register() {
         />
 
         <select
+          value={form.role}
           className="w-full mb-6 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white"
           onChange={(e) =>
             setForm({ ...form, role: e.target.value })
