@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../lib/api";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-export default function Home() {
+function FormPageContent() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -813,6 +813,14 @@ export default function Home() {
       </div>
 
     </div>
+  );
+}
+
+export default function FormPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-900" />}>
+      <FormPageContent />
+    </Suspense>
   );
 }
 
