@@ -795,17 +795,6 @@ function FormPageContent() {
                   : "Proceed to Payment - ₹500"}
             </button>
 
-            {!isEdit && (
-              <button
-                type="button"
-                onClick={submitFormBypassPayment}
-                disabled={loading}
-                className="w-full bg-slate-700 hover:bg-slate-600 py-3 rounded-lg text-white font-semibold mt-3 disabled:opacity-50"
-              >
-                Test Submit (Bypass Payment)
-              </button>
-            )}
-
           </div>
 
         </div>
